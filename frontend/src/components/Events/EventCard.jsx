@@ -26,7 +26,7 @@ const EventCard = () => {
   //   }
   return (
     // ${active ? 'unset' : 'mb-12'}
-    <div className={`w-full block bg-white rounded-lg lg:flex p-2`}>
+    <div className={`w-full block bg-white rounded-lg lg:flex p-2 mb-12`}>
       <div className='w-full lg:-w[50%] m-auto'>
         {/* <img src={`${data.images[0]?.url}`} alt='' /> */}
         <img

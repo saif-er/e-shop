@@ -15,7 +15,7 @@ const Events = () => {
 
         <div className='w-full grid'>
           <EventCard />
-          <h4>'No Events have!'</h4>
+          {/* <h4>'No Events have!'</h4> */}
         </div>
       </div>
     </div>
