@@ -16,9 +16,10 @@ import { useSelector } from 'react-redux';
 // import Cart from '../cart/Cart';
 // import Wishlist from '../Wishlist/Wishlist';
 import { RxCross1 } from 'react-icons/rx';
+import { backend_url } from '../../server';
 
 const Header = ({ activeHeading }) => {
-  //   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
   //   const { isSeller } = useSelector((state) => state.seller);
   //   const { wishlist } = useSelector((state) => state.wishlist);
   //   const { cart } = useSelector((state) => state.cart);
@@ -183,9 +184,37 @@ const Header = ({ activeHeading }) => {
                 className='relative cursor-pointer mr-[15px]'
                 // onClick={() => setOpenCart(true)}
               >
-                <Link to='/login'>
+                {/* <Link to='/login'>
                   <CgProfile size={30} color='rgb(255 255 255 / 83%)' />
-                </Link>
+                </Link> */}
+                {isAuthenticated ? (
+                  <div>
+                    <Link to='/profile'>
+                      <img
+                        // src={`${user.avatar?.url}`}
+                        src={`${backend_url}${user.avatar}`}
+                        alt=''
+                        // className='w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]'
+                        className='w-[40px] h-[40px] rounded-full border-[3px] border-[#0eae88]'
+                      />
+                    </Link>
+                  </div>
+                ) : (
+                  <>
+                    <Link
+                      to='/login'
+                      className='text-[18px] pr-[10px] text-[#000000b7]'
+                    >
+                      Login /
+                    </Link>
+                    <Link
+                      to='/sign-up'
+                      className='text-[18px] text-[#000000b7]'
+                    >
+                      Sign up
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
