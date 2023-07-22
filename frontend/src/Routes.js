@@ -9,7 +9,7 @@ import FAQPage from './pages/FAQPage';
 // import CheckoutPage from "./pages/CheckoutPage";
 // import PaymentPage from "./pages/PaymentPage";
 // import OrderSuccessPage from "./pages/OrderSuccessPage";
-// import ProductDetailsPage from "./pages/ProductDetailsPage";
+import ProductDetailsPage from './pages/ProductDetailsPage.jsx';
 // import ProfilePage from "./pages/ProfilePage";
 // import ShopCreatePage from "./pages/ShopCreate";
 // import SellerActivationPage from "./pages/SellerActivationPage";
@@ -30,7 +30,7 @@ export {
   // CheckoutPage,
   // PaymentPage,
   // OrderSuccessPage,
-  // ProductDetailsPage,
+  ProductDetailsPage,
   // ProfilePage,
   // ShopCreatePage,
   // SellerActivationPage,

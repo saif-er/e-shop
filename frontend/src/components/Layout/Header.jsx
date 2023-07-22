@@ -13,15 +13,15 @@ import { CgProfile } from 'react-icons/cg';
 import DropDown from './DropDown.jsx';
 import Navbar from './Navbar';
 import { useSelector } from 'react-redux';
-// import Cart from '../cart/Cart';
-// import Wishlist from '../Wishlist/Wishlist';
+import Cart from '../cart/Cart.jsx';
+import Wishlist from '../Wishlist/Wishlist.jsx';
 import { RxCross1 } from 'react-icons/rx';
 import { backend_url } from '../../server';
 
 const Header = ({ activeHeading }) => {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   //   const { isSeller } = useSelector((state) => state.seller);
-  //   const { wishlist } = useSelector((state) => state.wishlist);
+  // const { wishlist } = useSelector((state) => state.wishlist);
   //   const { cart } = useSelector((state) => state.cart);
   //   const { allProducts } = useSelector((state) => state.products);
   const [searchTerm, setSearchTerm] = useState('');
@@ -155,7 +155,7 @@ const Header = ({ activeHeading }) => {
             <div className={`${styles.noramlFlex}`}>
               <div
                 className='relative cursor-pointer mr-[15px]'
-                // onClick={() => setOpenWishlist(true)}
+                onClick={() => setOpenWishlist(true)}
               >
                 <AiOutlineHeart size={30} color='rgb(255 255 255 / 83%)' />
                 <span className='absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center'>
@@ -163,11 +163,10 @@ const Header = ({ activeHeading }) => {
                 </span>
               </div>
             </div>
-
             <div className={`${styles.noramlFlex}`}>
               <div
                 className='relative cursor-pointer mr-[15px]'
-                // onClick={() => setOpenCart(true)}
+                onClick={() => setOpenCart(true)}
               >
                 <AiOutlineShoppingCart
                   size={30}
@@ -178,7 +177,6 @@ const Header = ({ activeHeading }) => {
                 </span>
               </div>
             </div>
-
             <div className={`${styles.noramlFlex}`}>
               <div
                 className='relative cursor-pointer mr-[15px]'
@@ -217,6 +215,12 @@ const Header = ({ activeHeading }) => {
                 )}
               </div>
             </div>
+            {/* cart popup */}
+            {openCart ? <Cart setOpenCart={setOpenCart} /> : null}
+            {/* wishlist popup */}
+            {openWishlist ? (
+              <Wishlist setOpenWishlist={setOpenWishlist} />
+            ) : null}
           </div>
         </div>
       </div>
