@@ -514,6 +514,27 @@ const PaymentMethod = () => {
         <h1 className='text-[25px] font-[600] text-[#000000ba] pb-2'>
           Payment Methods
         </h1>
+        <div className={`${styles.button} rounded-md`}>
+          <span className='text-[#fff]'>Add New</span>
+        </div>
+      </div>
+      <br />
+      <div className='w-full bg-white h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10'>
+        <div className='flex items-center '>
+          <img
+            className='w-[50px]'
+            src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/1200px-Visa_Inc._logo.svg.png?20170118154621'
+            alt=''
+          />
+          <h5 className='pl-5 font-[600]'>Mohammad Saifuddin</h5>
+        </div>
+        <div className='pl-8 flex items-center'>
+          <h6>1234 **** *** ****</h6>
+          <h5 className='pl-6'>01/2030</h5>
+        </div>
+        <div className='min-w-[10%] flex items-center justify-between pl-8'>
+          <AiOutlineDelete size={25} className='cursor-pointer' />
+        </div>
       </div>
     </div>
   );
