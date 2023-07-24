@@ -165,7 +165,8 @@ const ProfileSidebar = ({ setActive, active }) => {
       )}
       <div
         className='single_item flex items-center cursor-pointer w-full mb-8'
-        onClick={logoutHandler}
+        onClick={() => setActive(8) || logoutHandler()}
+        // onClick={logoutHandler}
       >
         <AiOutlineLogin size={20} color={active === 8 ? 'red' : ''} />
         <span

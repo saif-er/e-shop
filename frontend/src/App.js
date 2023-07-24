@@ -26,9 +26,10 @@ import axios from 'axios';
 import Store from './redux/store';
 import { loadUser } from './redux/actions/user';
 import { useSelector } from 'react-redux';
+import ProtectedRoute from './ProtectedRoute';
 
 const App = () => {
-  const { loading } = useSelector((state) => state.user);
+  const { loading, isAuthenticated } = useSelector((state) => state.user);
 
   useEffect(() => {
     Store.dispatch(loadUser());
@@ -68,15 +69,15 @@ const App = () => {
           }
         /> */}
             {/* <Route path="/order/success" element={<OrderSuccessPage />} /> */}
-            <Route path='/profile' element={<ProfilePage />} />
-            {/* <Route
+            {/* <Route path='/profile' element={<ProfilePage />} /> */}
+            <Route
               path='/profile'
               element={
                 <ProtectedRoute>
                   <ProfilePage />
                 </ProtectedRoute>
               }
-            /> */}
+            />
             {/* <Route
           path="/inbox"
           element={
