@@ -7,8 +7,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { server } from '../../server';
 import styles from '../../styles/styles';
-// import { DataGrid } from "@material-ui/data-grid";
-// import { Button } from "@material-ui/core";
+import { DataGrid } from '@material-ui/data-grid';
+import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { MdTrackChanges } from 'react-icons/md';
 import { RxCross1 } from 'react-icons/rx';
@@ -172,13 +172,350 @@ const ProfileContent = ({ active }) => {
       )}
 
       {/* order */}
-      {/* {active === 2 && (
+      {active === 2 && (
         <div>
           <AllOrders />
         </div>
-      )} */}
+      )}
+
+      {/* Refund */}
+      {active === 3 && (
+        <div>
+          <AllRefundOrders />
+        </div>
+      )}
+
+      {/* Track order */}
+      {active === 5 && (
+        <div>
+          <TrackOrder />
+        </div>
+      )}
+
+      {/* Change Password */}
+      {/* {active === 6 && <div><ChangePassword /></div>} */}
+
+      {/* Payment Method */}
+      {active === 6 && (
+        <div>
+          <PaymentMethod />
+        </div>
+      )}
+
+      {/*  user Address */}
+      {active === 7 && <div>{/* <Address /> */}</div>}
     </div>
   );
 };
 
+const AllOrders = () => {
+  // const { user } = useSelector((state) => state.user);
+  // const { orders } = useSelector((state) => state.order);
+  const orders = [
+    {
+      _id: '348473457djsfgsg374648djfbfgh345',
+      orderItems: [
+        {
+          name: 'Iphone 14 pro max',
+        },
+      ],
+      totalPrice: 120,
+      orderStatus: 'Processing',
+    },
+  ];
+
+  const columns = [
+    { field: 'id', headerName: 'Order ID', minWidth: 150, flex: 0.7 },
+
+    {
+      field: 'status',
+      headerName: 'Status',
+      minWidth: 130,
+      flex: 0.7,
+      cellClassName: (params) => {
+        return params.getValue(params.id, 'status') === 'Delivered'
+          ? 'greenColor'
+          : 'redColor';
+      },
+    },
+    {
+      field: 'itemsQty',
+      headerName: 'Items Qty',
+      type: 'number',
+      minWidth: 130,
+      flex: 0.7,
+    },
+
+    {
+      field: 'total',
+      headerName: 'Total',
+      type: 'number',
+      minWidth: 130,
+      flex: 0.8,
+    },
+
+    {
+      field: ' ',
+      flex: 1,
+      minWidth: 150,
+      headerName: '',
+      type: 'number',
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={`/user/order/${params.id}`}>
+              <Button>
+                <AiOutlineArrowRight size={20} />
+              </Button>
+            </Link>
+          </>
+        );
+      },
+    },
+  ];
+
+  const dispatch = useDispatch();
+
+  //   useEffect(() => {
+  //     dispatch(getAllOrdersOfUser(user._id));
+  //   }, []);
+
+  const row = [];
+
+  orders &&
+    orders.forEach((item) => {
+      row.push({
+        id: item._id,
+        itemsQty: item.orderItems.length,
+        // itemsQty: item.cart.length,
+        total: 'US$ ' + item.totalPrice,
+        status: item.orderStatus,
+        // status: item.status,
+      });
+    });
+
+  return (
+    <div className='pl-8 pt-1'>
+      <DataGrid
+        rows={row}
+        columns={columns}
+        pageSize={10}
+        disableSelectionOnClick
+        autoHeight
+      />
+    </div>
+  );
+};
+
+const AllRefundOrders = () => {
+  // const { user } = useSelector((state) => state.user);
+  // const { orders } = useSelector((state) => state.order);
+  const orders = [
+    {
+      _id: '348473457djsfgsg374648djfbfgh345',
+      orderItems: [
+        {
+          name: 'Iphone 14 pro max',
+        },
+      ],
+      totalPrice: 120,
+      orderStatus: 'Processing',
+    },
+  ];
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getAllOrdersOfUser(user._id));
+  // }, []);
+
+  // const eligibleOrders =
+  //   orders && orders.filter((item) => item.status === "Processing refund");
+
+  const columns = [
+    { field: 'id', headerName: 'Order ID', minWidth: 150, flex: 0.7 },
+
+    {
+      field: 'status',
+      headerName: 'Status',
+      minWidth: 130,
+      flex: 0.7,
+      cellClassName: (params) => {
+        return params.getValue(params.id, 'status') === 'Delivered'
+          ? 'greenColor'
+          : 'redColor';
+      },
+    },
+    {
+      field: 'itemsQty',
+      headerName: 'Items Qty',
+      type: 'number',
+      minWidth: 130,
+      flex: 0.7,
+    },
+
+    {
+      field: 'total',
+      headerName: 'Total',
+      type: 'number',
+      minWidth: 130,
+      flex: 0.8,
+    },
+
+    {
+      field: ' ',
+      flex: 1,
+      minWidth: 150,
+      headerName: '',
+      type: 'number',
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={`/user/order/${params.id}`}>
+              <Button>
+                <AiOutlineArrowRight size={20} />
+              </Button>
+            </Link>
+          </>
+        );
+      },
+    },
+  ];
+
+  const row = [];
+
+  orders &&
+    orders.forEach((item) => {
+      row.push({
+        id: item._id,
+        itemsQty: item.orderItems.length,
+        // itemsQty: item.cart.length,
+        total: 'US$ ' + item.totalPrice,
+        status: item.orderStatus,
+        // status: item.status,
+      });
+    });
+  return (
+    <div className='pl-8 pt-1'>
+      <DataGrid
+        rows={row}
+        columns={columns}
+        pageSize={10}
+        autoHeight
+        disableSelectionOnClick
+      />
+    </div>
+  );
+};
+
+const TrackOrder = () => {
+  // const { user } = useSelector((state) => state.user);
+  // const { orders } = useSelector((state) => state.order);
+  const orders = [
+    {
+      _id: '348473457djsfgsg374648djfbfgh345',
+      orderItems: [
+        {
+          name: 'Iphone 14 pro max',
+        },
+      ],
+      totalPrice: 120,
+      orderStatus: 'Processing',
+    },
+  ];
+  const dispatch = useDispatch();
+
+  //   useEffect(() => {
+  //     dispatch(getAllOrdersOfUser(user._id));
+  //   }, []);
+
+  const columns = [
+    { field: 'id', headerName: 'Order ID', minWidth: 150, flex: 0.7 },
+
+    {
+      field: 'status',
+      headerName: 'Status',
+      minWidth: 130,
+      flex: 0.7,
+      cellClassName: (params) => {
+        return params.getValue(params.id, 'status') === 'Delivered'
+          ? 'greenColor'
+          : 'redColor';
+      },
+    },
+    {
+      field: 'itemsQty',
+      headerName: 'Items Qty',
+      type: 'number',
+      minWidth: 130,
+      flex: 0.7,
+    },
+
+    {
+      field: 'total',
+      headerName: 'Total',
+      type: 'number',
+      minWidth: 130,
+      flex: 0.8,
+    },
+
+    {
+      field: ' ',
+      flex: 1,
+      minWidth: 150,
+      headerName: '',
+      type: 'number',
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <>
+            <Link to={`/user/track/order/${params.id}`}>
+              <Button>
+                <MdTrackChanges size={20} />
+              </Button>
+            </Link>
+          </>
+        );
+      },
+    },
+  ];
+
+  const row = [];
+
+  orders &&
+    orders.forEach((item) => {
+      row.push({
+        id: item._id,
+        itemsQty: item.orderItems.length,
+        // itemsQty: item.cart.length,
+        total: 'US$ ' + item.totalPrice,
+        status: item.status,
+      });
+    });
+
+  return (
+    <div className='pl-8 pt-1'>
+      <DataGrid
+        rows={row}
+        columns={columns}
+        pageSize={10}
+        disableSelectionOnClick
+        autoHeight
+      />
+    </div>
+  );
+};
+
+const PaymentMethod = () => {
+  return (
+    <div className='w-full px-5'>
+      <div className='flex w-full items-center justify-between'>
+        <h1 className='text-[25px] font-[600] text-[#000000ba] pb-2'>
+          Payment Methods
+        </h1>
+      </div>
+    </div>
+  );
+};
 export default ProfileContent;
