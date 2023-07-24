@@ -11,6 +11,13 @@ import {
   EventsPage,
   FAQPage,
   ProductDetailsPage,
+  ProfilePage,
+  // ShopCreatePage,
+  // SellerActivationPage,
+  // ShopLoginPage,
+  // OrderDetailsPage,
+  // TrackOrderPage,
+  // UserInbox,
 } from './Routes.js';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -61,14 +68,15 @@ const App = () => {
           }
         /> */}
             {/* <Route path="/order/success" element={<OrderSuccessPage />} /> */}
+            <Route path='/profile' element={<ProfilePage />} />
             {/* <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-        /> */}
+              path='/profile'
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            /> */}
             {/* <Route
           path="/inbox"
           element={
