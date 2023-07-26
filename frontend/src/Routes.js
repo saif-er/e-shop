@@ -6,13 +6,13 @@ import ProductsPage from './pages/ProductsPage';
 import BestSellingPage from './pages/BestSellingPage';
 import EventsPage from './pages/EventsPage';
 import FAQPage from './pages/FAQPage';
-// import CheckoutPage from "./pages/CheckoutPage";
+import CheckoutPage from './pages/CheckoutPage.jsx';
 // import PaymentPage from "./pages/PaymentPage";
 // import OrderSuccessPage from "./pages/OrderSuccessPage";
 import ProductDetailsPage from './pages/ProductDetailsPage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
-// import ShopCreatePage from "./pages/ShopCreate";
-// import SellerActivationPage from "./pages/SellerActivationPage";
+import ShopCreatePage from './pages/ShopCreate.jsx';
+import SellerActivationPage from './pages/SellerActivationPage.jsx';
 // import ShopLoginPage from "./pages/ShopLoginPage";
 // import OrderDetailsPage from "./pages/OrderDetailsPage";
 // import TrackOrderPage from "./pages/TrackOrderPage";
@@ -27,13 +27,13 @@ export {
   BestSellingPage,
   EventsPage,
   FAQPage,
-  // CheckoutPage,
+  CheckoutPage,
   // PaymentPage,
   // OrderSuccessPage,
   ProductDetailsPage,
   ProfilePage,
-  // ShopCreatePage,
-  // SellerActivationPage,
+  ShopCreatePage,
+  SellerActivationPage,
   // ShopLoginPage,
   // OrderDetailsPage,
   // TrackOrderPage,

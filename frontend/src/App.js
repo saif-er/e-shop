@@ -10,10 +10,11 @@ import {
   BestSellingPage,
   EventsPage,
   FAQPage,
+  CheckoutPage,
   ProductDetailsPage,
   ProfilePage,
-  // ShopCreatePage,
-  // SellerActivationPage,
+  ShopCreatePage,
+  SellerActivationPage,
   // ShopLoginPage,
   // OrderDetailsPage,
   // TrackOrderPage,
@@ -54,20 +55,24 @@ const App = () => {
               path='/activation/:activation_token'
               element={<ActivationPage />}
             />
+            <Route
+              path='/seller/activation/:activation_token'
+              element={<SellerActivationPage />}
+            />
             <Route path='/products' element={<ProductsPage />} />
             {/* <Route path='/product/:id' element={<ProductDetailsPage />} /> */}
             <Route path='/product/:name' element={<ProductDetailsPage />} />
             <Route path='/best-selling' element={<BestSellingPage />} />
             <Route path='/events' element={<EventsPage />} />
             <Route path='/faq' element={<FAQPage />} />
-            {/* <Route
-          path="/checkout"
-          element={
-            <ProtectedRoute>
-              <CheckoutPage />
-            </ProtectedRoute>
-          }
-        /> */}
+            <Route
+              path='/checkout'
+              element={
+                <ProtectedRoute>
+                  <CheckoutPage />
+                </ProtectedRoute>
+              }
+            />
             {/* <Route path="/order/success" element={<OrderSuccessPage />} /> */}
             {/* <Route path='/profile' element={<ProfilePage />} /> */}
             <Route
@@ -104,7 +109,7 @@ const App = () => {
         /> */}
             {/* <Route path="/shop/preview/:id" element={<ShopPreviewPage />} /> */}
             {/* shop Routes */}
-            {/* <Route path="/shop-create" element={<ShopCreatePage />} /> */}
+            <Route path='/shop-create' element={<ShopCreatePage />} />
             {/* <Route path="/shop-login" element={<ShopLoginPage />} /> */}
             {/* <Route
           path="/shop/:id"
