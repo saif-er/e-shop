@@ -15,7 +15,7 @@ import {
   ProfilePage,
   ShopCreatePage,
   SellerActivationPage,
-  // ShopLoginPage,
+  ShopLoginPage,
   // OrderDetailsPage,
   // TrackOrderPage,
   // UserInbox,
@@ -110,7 +110,7 @@ const App = () => {
             {/* <Route path="/shop/preview/:id" element={<ShopPreviewPage />} /> */}
             {/* shop Routes */}
             <Route path='/shop-create' element={<ShopCreatePage />} />
-            {/* <Route path="/shop-login" element={<ShopLoginPage />} /> */}
+            <Route path='/shop-login' element={<ShopLoginPage />} />
             {/* <Route
           path="/shop/:id"
           element={
