@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import {
   LoginPage,
   SignupPage,
@@ -20,20 +20,29 @@ import {
   // TrackOrderPage,
   // UserInbox,
 } from './Routes.js';
+import { ShopHomePage } from './ShopRoutes.js';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { server } from '../../frontend/src/server';
 import axios from 'axios';
 import Store from './redux/store';
-import { loadUser } from './redux/actions/user';
+import { loadSeller, loadUser } from './redux/actions/user';
 import { useSelector } from 'react-redux';
 import ProtectedRoute from './ProtectedRoute';
+import SellerProtectedRoute from './SellerProtectedRoute';
 
 const App = () => {
   const { loading, isAuthenticated } = useSelector((state) => state.user);
+  const { isLoading, isSeller } = useSelector((state) => state.seller);
+  // const navigate = useNavigate();
 
   useEffect(() => {
     Store.dispatch(loadUser());
+    Store.dispatch(loadSeller());
+
+    // if (isSeller) {
+    //   navigate(`/shop/${seller._id}`);
+    // }
     // axios
     //   .get(`${server}/user/getuser`, { withCredentials: true })
     //   .then((res) => {
@@ -45,7 +54,7 @@ const App = () => {
   }, []);
   return (
     <>
-      {loading ? null : (
+      {loading || isLoading ? null : (
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<HomePage />} />
@@ -108,17 +117,19 @@ const App = () => {
           }
         /> */}
             {/* <Route path="/shop/preview/:id" element={<ShopPreviewPage />} /> */}
+
             {/* shop Routes */}
+
             <Route path='/shop-create' element={<ShopCreatePage />} />
             <Route path='/shop-login' element={<ShopLoginPage />} />
-            {/* <Route
-          path="/shop/:id"
-          element={
-            <SellerProtectedRoute>
-              <ShopHomePage />
-            </SellerProtectedRoute>
-          }
-        /> */}
+            <Route
+              path='/shop/:id'
+              element={
+                <SellerProtectedRoute>
+                  <ShopHomePage />
+                </SellerProtectedRoute>
+              }
+            />
             {/* <Route
           path="/settings"
           element={

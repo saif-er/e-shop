@@ -5,9 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { server } from '../../server';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 const ShopLogin = () => {
   const navigate = useNavigate();
+  //   const { seller } = useSelector((state) => state.seller);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [visible, setVisible] = useState(false);
@@ -26,7 +28,7 @@ const ShopLogin = () => {
       )
       .then((res) => {
         toast.success('Login Success!');
-        navigate('/');
+        // navigate('/shop/:id');
         // navigate("/dashboard");
         window.location.reload(true);
       })

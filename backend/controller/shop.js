@@ -6,14 +6,15 @@ const jwt = require('jsonwebtoken');
 const sendMail = require('../utils/sendMail');
 const sendToken = require('../utils/jwtToken');
 const Shop = require('../model/shop');
-const { isAuthenticated } = require('../middleware/auth');
+// const { isAuthenticated } = require('../middleware/auth');
 const { upload } = require('../multer');
+const { isAuthenticated, isSeller } = require('../middleware/auth');
 // const { isAuthenticated, isSeller, isAdmin } = require('../middleware/auth');
 // const cloudinary = require('cloudinary');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 const ErrorHandler = require('../utils/ErrorHandler');
 const User = require('../model/user');
-// const sendShopToken = require("../utils/shopToken");
+const sendShopToken = require('../utils/shopToken');
 
 /////////////////////////////////////////////////
 // create shop
@@ -161,7 +162,8 @@ router.post(
         phoneNumber,
       });
 
-      sendToken(seller, 201, res);
+      // sendToken(seller, 201, res);
+      sendShopToken(seller, 201, res);
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
@@ -193,35 +195,36 @@ router.post(
         );
       }
 
-      sendToken(user, 201, res);
-      // sendShopToken(user, 201, res);
+      // sendToken(user, 201, res);
+      sendShopToken(user, 201, res);
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
     }
   })
 );
 
-// // load shop
-// router.get(
-//   '/getSeller',
-//   isSeller,
-//   catchAsyncErrors(async (req, res, next) => {
-//     try {
-//       const seller = await Shop.findById(req.seller._id);
+// load shop
+router.get(
+  '/getSeller',
+  isSeller,
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const seller = await Shop.findById(req.seller._id);
+      // const seller = await Shop.findById(req.seller._id);
 
-//       if (!seller) {
-//         return next(new ErrorHandler("User doesn't exists", 400));
-//       }
+      if (!seller) {
+        return next(new ErrorHandler("User doesn't exists", 400));
+      }
 
-//       res.status(200).json({
-//         success: true,
-//         seller,
-//       });
-//     } catch (error) {
-//       return next(new ErrorHandler(error.message, 500));
-//     }
-//   })
-// );
+      res.status(200).json({
+        success: true,
+        seller,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
 
 // // log out from shop
 // router.get(
