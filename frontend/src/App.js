@@ -19,8 +19,9 @@ import {
   // OrderDetailsPage,
   // TrackOrderPage,
   // UserInbox,
-} from './Routes.js';
-import { ShopHomePage } from './ShopRoutes.js';
+} from './routes/Routes.js';
+import { ShopHomePage, ShopCreateProduct } from './ShopRoutes.js';
+import { ShopDashboardPage } from './routes/ShopRoutes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { server } from '../../frontend/src/server';
@@ -28,12 +29,10 @@ import axios from 'axios';
 import Store from './redux/store';
 import { loadSeller, loadUser } from './redux/actions/user';
 import { useSelector } from 'react-redux';
-import ProtectedRoute from './ProtectedRoute';
-import SellerProtectedRoute from './SellerProtectedRoute';
+import ProtectedRoute from './routes/ProtectedRoute';
+import SellerProtectedRoute from './routes/SellerProtectedRoute';
 
 const App = () => {
-  const { loading, isAuthenticated } = useSelector((state) => state.user);
-  const { isLoading, isSeller } = useSelector((state) => state.seller);
   // const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,45 +53,45 @@ const App = () => {
   }, []);
   return (
     <>
-      {loading || isLoading ? null : (
-        <BrowserRouter>
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/sign-up' element={<SignupPage />} />
-            <Route
-              path='/activation/:activation_token'
-              element={<ActivationPage />}
-            />
-            <Route
-              path='/seller/activation/:activation_token'
-              element={<SellerActivationPage />}
-            />
-            <Route path='/products' element={<ProductsPage />} />
-            {/* <Route path='/product/:id' element={<ProductDetailsPage />} /> */}
-            <Route path='/product/:name' element={<ProductDetailsPage />} />
-            <Route path='/best-selling' element={<BestSellingPage />} />
-            <Route path='/events' element={<EventsPage />} />
-            <Route path='/faq' element={<FAQPage />} />
-            <Route
-              path='/checkout'
-              element={
-                <ProtectedRoute>
-                  <CheckoutPage />
-                </ProtectedRoute>
-              }
-            />
-            {/* <Route path="/order/success" element={<OrderSuccessPage />} /> */}
-            {/* <Route path='/profile' element={<ProfilePage />} /> */}
-            <Route
-              path='/profile'
-              element={
-                <ProtectedRoute>
-                  <ProfilePage />
-                </ProtectedRoute>
-              }
-            />
-            {/* <Route
+      {/* {loading || isLoading ? null : ( */}
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/sign-up' element={<SignupPage />} />
+          <Route
+            path='/activation/:activation_token'
+            element={<ActivationPage />}
+          />
+          <Route
+            path='/seller/activation/:activation_token'
+            element={<SellerActivationPage />}
+          />
+          <Route path='/products' element={<ProductsPage />} />
+          {/* <Route path='/product/:id' element={<ProductDetailsPage />} /> */}
+          <Route path='/product/:name' element={<ProductDetailsPage />} />
+          <Route path='/best-selling' element={<BestSellingPage />} />
+          <Route path='/events' element={<EventsPage />} />
+          <Route path='/faq' element={<FAQPage />} />
+          <Route
+            path='/checkout'
+            element={
+              <ProtectedRoute>
+                <CheckoutPage />
+              </ProtectedRoute>
+            }
+          />
+          {/* <Route path="/order/success" element={<OrderSuccessPage />} /> */}
+          {/* <Route path='/profile' element={<ProfilePage />} /> */}
+          <Route
+            path='/profile'
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          {/* <Route
           path="/inbox"
           element={
             <ProtectedRoute>
@@ -100,7 +99,7 @@ const App = () => {
             </ProtectedRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/user/order/:id"
           element={
             <ProtectedRoute>
@@ -108,7 +107,7 @@ const App = () => {
             </ProtectedRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/user/track/order/:id"
           element={
             <ProtectedRoute>
@@ -116,21 +115,21 @@ const App = () => {
             </ProtectedRoute>
           }
         /> */}
-            {/* <Route path="/shop/preview/:id" element={<ShopPreviewPage />} /> */}
+          {/* <Route path="/shop/preview/:id" element={<ShopPreviewPage />} /> */}
 
-            {/* shop Routes */}
+          {/* shop Routes */}
 
-            <Route path='/shop-create' element={<ShopCreatePage />} />
-            <Route path='/shop-login' element={<ShopLoginPage />} />
-            <Route
-              path='/shop/:id'
-              element={
-                <SellerProtectedRoute>
-                  <ShopHomePage />
-                </SellerProtectedRoute>
-              }
-            />
-            {/* <Route
+          <Route path='/shop-create' element={<ShopCreatePage />} />
+          <Route path='/shop-login' element={<ShopLoginPage />} />
+          <Route
+            path='/shop/:id'
+            element={
+              <SellerProtectedRoute>
+                <ShopHomePage />
+              </SellerProtectedRoute>
+            }
+          />
+          {/* <Route
           path="/settings"
           element={
             <SellerProtectedRoute>
@@ -138,23 +137,23 @@ const App = () => {
             </SellerProtectedRoute>
           }
         /> */}
-            {/* <Route
-          path="/dashboard"
-          element={
-            <SellerProtectedRoute>
-              <ShopDashboardPage />
-            </SellerProtectedRoute>
-          }
-        /> */}
-            {/* <Route
-          path="/dashboard-create-product"
-          element={
-            <SellerProtectedRoute>
-              <ShopCreateProduct />
-            </SellerProtectedRoute>
-          }
-        /> */}
-            {/* <Route
+          <Route
+            path='/dashboard'
+            element={
+              <SellerProtectedRoute>
+                <ShopDashboardPage />
+              </SellerProtectedRoute>
+            }
+          />
+          <Route
+            path='/dashboard-create-product'
+            element={
+              <SellerProtectedRoute>
+                <ShopCreateProduct />
+              </SellerProtectedRoute>
+            }
+          />
+          {/* <Route
           path="/dashboard-orders"
           element={
             <SellerProtectedRoute>
@@ -162,7 +161,7 @@ const App = () => {
             </SellerProtectedRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/dashboard-refunds"
           element={
             <SellerProtectedRoute>
@@ -171,7 +170,7 @@ const App = () => {
           }
         /> */}
 
-            {/* <Route
+          {/* <Route
           path="/order/:id"
           element={
             <SellerProtectedRoute>
@@ -179,7 +178,7 @@ const App = () => {
             </SellerProtectedRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/dashboard-products"
           element={
             <SellerProtectedRoute>
@@ -187,7 +186,7 @@ const App = () => {
             </SellerProtectedRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/dashboard-create-event"
           element={
             <SellerProtectedRoute>
@@ -195,7 +194,7 @@ const App = () => {
             </SellerProtectedRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/dashboard-events"
           element={
             <SellerProtectedRoute>
@@ -203,7 +202,7 @@ const App = () => {
             </SellerProtectedRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/dashboard-coupouns"
           element={
             <SellerProtectedRoute>
@@ -211,7 +210,7 @@ const App = () => {
             </SellerProtectedRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/dashboard-withdraw-money"
           element={
             <SellerProtectedRoute>
@@ -219,7 +218,7 @@ const App = () => {
             </SellerProtectedRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/dashboard-messages"
           element={
             <SellerProtectedRoute>
@@ -227,8 +226,8 @@ const App = () => {
             </SellerProtectedRoute>
           }
         /> */}
-            {/* Admin Routes */}
-            {/* <Route
+          {/* Admin Routes */}
+          {/* <Route
           path="/admin/dashboard"
           element={
             <ProtectedAdminRoute>
@@ -236,7 +235,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/admin-users"
           element={
             <ProtectedAdminRoute>
@@ -244,7 +243,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/admin-sellers"
           element={
             <ProtectedAdminRoute>
@@ -252,7 +251,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/admin-orders"
           element={
             <ProtectedAdminRoute>
@@ -260,7 +259,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/admin-products"
           element={
             <ProtectedAdminRoute>
@@ -268,7 +267,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/admin-events"
           element={
             <ProtectedAdminRoute>
@@ -276,7 +275,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         /> */}
-            {/* <Route
+          {/* <Route
           path="/admin-withdraw-request"
           element={
             <ProtectedAdminRoute>
@@ -284,21 +283,21 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         /> */}
-          </Routes>
-          <ToastContainer
-            position='bottom-center'
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme='dark'
-          />
-        </BrowserRouter>
-      )}
+        </Routes>
+        <ToastContainer
+          position='bottom-center'
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme='dark'
+        />
+      </BrowserRouter>
+      {/* )} */}
     </>
   );
 };
