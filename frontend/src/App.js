@@ -20,8 +20,11 @@ import {
   // TrackOrderPage,
   // UserInbox,
 } from './routes/Routes.js';
-import { ShopHomePage, ShopCreateProduct } from './ShopRoutes.js';
-import { ShopDashboardPage } from './routes/ShopRoutes';
+import {
+  ShopDashboardPage,
+  ShopCreateProduct,
+  ShopAllProducts,
+} from './routes/ShopRoutes';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { server } from '../../frontend/src/server';
@@ -30,6 +33,7 @@ import Store from './redux/store';
 import { loadSeller, loadUser } from './redux/actions/user';
 import { useSelector } from 'react-redux';
 import ProtectedRoute from './routes/ProtectedRoute';
+import { ShopHomePage } from './ShopRoutes.js';
 import SellerProtectedRoute from './routes/SellerProtectedRoute';
 
 const App = () => {
@@ -178,14 +182,14 @@ const App = () => {
             </SellerProtectedRoute>
           }
         /> */}
-          {/* <Route
-          path="/dashboard-products"
-          element={
-            <SellerProtectedRoute>
-              <ShopAllProducts />
-            </SellerProtectedRoute>
-          }
-        /> */}
+          <Route
+            path='/dashboard-products'
+            element={
+              <SellerProtectedRoute>
+                <ShopAllProducts />
+              </SellerProtectedRoute>
+            }
+          />
           {/* <Route
           path="/dashboard-create-event"
           element={
