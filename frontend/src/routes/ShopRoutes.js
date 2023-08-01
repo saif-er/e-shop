@@ -1,7 +1,7 @@
 import ShopDashboardPage from '../pages/Shop/ShopDashboardPage.jsx';
 import ShopCreateProduct from '../pages/Shop/ShopCreateProduct';
 import ShopAllProducts from '../pages/Shop/ShopAllProducts.jsx';
-// import ShopCreateEvents from "../pages/Shop/ShopCreateEvents";
+import ShopCreateEvents from '../pages/Shop/ShopCreateEvents.jsx';
 // import ShopAllEvents from "../pages/Shop/ShopAllEvents";
 // import ShopAllCoupouns from "../pages/Shop/ShopAllCoupouns";
 // import ShopPreviewPage from "../pages/Shop/ShopPreviewPage";
@@ -16,7 +16,7 @@ export {
   ShopDashboardPage,
   ShopCreateProduct,
   ShopAllProducts,
-  // ShopCreateEvents,
+  ShopCreateEvents,
   // ShopAllEvents,
   // ShopAllCoupouns,
   // ShopPreviewPage,
